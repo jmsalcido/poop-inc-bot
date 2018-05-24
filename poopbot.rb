@@ -29,7 +29,7 @@ class PoopBot < SlackRubyBot::Bot
         if [1,2,3].include? floor
             client.say(text: text, channel: data.channel)
 
-            poop = HTTP.get("http://twcc.fr/poop/api/")
+            poop = HTTP.get(ENV['POOP_INC_URL'])
             availability = JSON.parse(poop.body.to_s)
 
             found = availability.find { |info| info["name"] == floors[floor] }
