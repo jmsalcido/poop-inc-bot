@@ -17,8 +17,9 @@ require "./bathfinder"
 
 class PoopBot < SlackRubyBot::Bot
 
+    finder = BathFinder.new
+
     match(/floor\s*(?<floor>\d*)/i) do |client, data, match|
-        finder = BathFinder
         floor = match[:floor].to_i
 
         text = finder.finding_text(floor)
