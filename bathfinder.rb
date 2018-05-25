@@ -26,8 +26,8 @@ class BathFinder
         ":toilet: *#{floor}* is not valid bato."
     end
 
-    def find_bath(floor)
-        found = find_bath_in_api(floor)
+    def find_bath(json, floor)
+        found = find_bath_in_response(json, floor)
 
         if found == nil
             text = not_found_text
@@ -44,11 +44,8 @@ class BathFinder
 
     private
 
-    def find_bath_in_api(floor)
-        poop = HTTP.follow.get(ENV['POOP_INC_URL'])
-        availability = JSON.parse(poop.body.to_s)
-
-        availability.find { |info| info["name"] == @floors[floor] }
+    def find_bath_in_response(json, floor)
+        json.find { |info| info["name"] == @floors[floor] }
     end
 
     def not_found_text

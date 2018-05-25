@@ -27,7 +27,9 @@ class PoopBot < SlackRubyBot::Bot
         if finder.is_valid(floor)
             client.say(text: text, channel: data.channel)
 
-            text = finder.find_bath(floor)
+            request = HTTP.follow.get(ENV['POOP_INC_URL'])
+            json = JSON.parse(request.body.to_s)
+            text = finder.find_bath(json, floor)
         else
             text = finder.invalid_floor(floor)
         end
