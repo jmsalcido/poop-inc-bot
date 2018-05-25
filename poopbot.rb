@@ -9,7 +9,7 @@ Celluloid.logger = nil
 require "http"
 require "json"
 require "pry"
-require "bathfinder"
+require "./bathfinder"
 
 # cl3m3n7
 # status: 0 // = vacant
